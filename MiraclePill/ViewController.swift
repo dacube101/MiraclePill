@@ -10,32 +10,18 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var statePicker: UIPickerView!
     @IBOutlet weak var statePickerBtn: UIButton!
     @IBOutlet weak var BuyNowBtn: UIButton!
     
-    @IBOutlet weak var successindicator: UIImageView!
+    @IBOutlet weak var countryLabel: UILabel!
     
-    @IBOutlet weak var pill: UIImageView!
-    @IBOutlet weak var pillLabel: UILabel!
-    @IBOutlet weak var amount150: UILabel!
-    @IBOutlet weak var divider: UIView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var nameLabel: UITextField!
-    @IBOutlet weak var address: UILabel!
-    @IBOutlet weak var addressLabel: UITextField!
-    @IBOutlet weak var city: UILabel!
-    @IBOutlet weak var cityLabel: UITextField!
-    @IBOutlet weak var state: UILabel!
-    @IBOutlet weak var country: UILabel!
-    @IBOutlet weak var countryLabel: UITextField!
-    @IBOutlet weak var zipCode: UILabel!
-    @IBOutlet weak var zipCodeLabel: UITextField!
+    @IBOutlet weak var countryTextField: UITextField!
     
-    
-    
-    
-    
+    @IBOutlet weak var zipCodeLabel: UILabel!
+    @IBOutlet weak var zipCodeTextField: UITextField!
+    @IBOutlet weak var succesIndicator: UIImageView!
     
     let states = ["Alaska","Arkansa","Alabama","California","Maine","New York"]
     
@@ -50,25 +36,30 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.didReceiveMemoryWarning()
            }
 
+    @IBAction func backButtonPressed(_ sender: Any) {
+        for view in self.view.subviews as [UIView] {
+            view.isHidden = false
+            succesIndicator.isHidden = true
+            statePicker.isHidden = true
+            
+        }
+    }
     
-    @IBAction func buyNowBtnPressed(_ sender: Any) {
-        successindicator.isHidden = false
-        name.isHidden = true
-        nameLabel.isHidden = true
-        address.isHidden = true
-        addressLabel.isHidden = true
-        city.isHidden = true
-        cityLabel.isHidden = true
-        state.isHidden = true
-        country.isHidden = true
-        countryLabel.isHidden = true
-        zipCode.isHidden = true
-        zipCodeLabel.isHidden = true
+    @IBAction func BuyNowBtnPressed(_ sender: Any) {
+        for view in self.view.subviews as [UIView] {
+            view.isHidden = true
+            succesIndicator.isHidden = false
+            backButton.isHidden = false
+        }
     }
     
         @IBAction func stateBtnPressed(_ sender: Any) {
         statePicker.isHidden = false
-                }
+            countryTextField.isHidden = true
+            countryLabel.isHidden = true
+            zipCodeTextField.isHidden = true
+            zipCodeLabel.isHidden = true
+                            }
     
     
     
@@ -87,7 +78,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         statePickerBtn.setTitle(states[row], for: UIControlState.normal)
         statePicker.isHidden = true
-                
+        countryTextField.isHidden = false
+        countryLabel.isHidden = false
+        zipCodeTextField.isHidden = false
+        zipCodeLabel.isHidden = false
     }
     
 }
